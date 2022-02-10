@@ -286,32 +286,3 @@ class Table:
         for c in cls.__subclasses__():
             if c.__name__ == cls_str:
                 return c
-
-if __name__ == '__main__':
-    class Student(Table):
-        table_name = 'student'
-
-        relations = [
-
-        ]
-    s = Student.find(1)
-
-    print(s)
-
-"""
-# online try
-G = {
-    'host': "sql6.freemysqlhosting.net",
-    'port': "3306",
-    'user': "sql6468542",
-    'password': "TwRdEzdxBb",
-    'database': "sql6468542"
-}
-Table.connect(G)
-class User(Table):
-    table_name = 'users'
-
-print(User.all()[0])
-u = User(name="H", age="20", password="passhrusi", gender="M")
-print(User.all()[0])
-"""
