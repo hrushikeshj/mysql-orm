@@ -82,3 +82,16 @@ def test_destroy():
 
     # assert record is deleted
     assert Student.find(pk_value) is None
+
+"""
+    --extra-index-url
+    CREATE TABLE student(id int(10) auto_increment PRIMARY KEY, name varchar(15), gender char(1), age int(3));
+
+    CONFIG = {
+        'host': "sql6.freemysqlhosting.net",
+        'port': "3306",
+        'user': "sql6471929",
+        'password': "n6sA2BD5Hk",
+        'database': "sql6471929"
+    }
+"""
