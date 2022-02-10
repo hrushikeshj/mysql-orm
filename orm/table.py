@@ -132,6 +132,24 @@ class Table:
         self.mark_as_created()
         return self
 
+    def update(self, **args):
+        if self.__in_db == False:
+            raise HORMError("Record in not in table.")
+
+        # update_query Eg- "name= %(name)s, age= %(age)s"
+        update_query = ', '.join(
+            [f"{field}= %({field})s" for field, val in args.items()])
+
+        # Eg- UPDATE student SET name= %(name)s, age= %(age)s WHERE id = 1;
+        sql_query = f"UPDATE { self.table_name } SET { update_query } WHERE { self.PRIMARY_KEY } = { self.primary_key_value() };"
+
+        self.execute_and_commit(sql_query, args)
+
+        for field, val in args.items():
+            setattr(self, field, val)
+
+        return self
+
     def destroy(self):
         delete_sql = f"DELETE FROM {self.table_name} WHERE {self.PRIMARY_KEY} = %s;"
         self.execute_and_commit(delete_sql, (self.primary_key_value(),))

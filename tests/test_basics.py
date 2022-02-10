@@ -19,7 +19,6 @@ class Author(Table):
 print(Author.find(1).art.where(id=2))
 print(Article.find(3).art())
 #Article.create(title="t3", content="c3", author_id='1')
-
 """
 Table student with following schema is alredy created in db
 
@@ -60,6 +59,15 @@ def test_create():
     new_stu = Student.create(name='test-name', age=22, gender='M')
     assert isinstance(new_stu, Student)
     assert new_stu.primary_key_value() is not None
+
+def test_update():
+    new_stu = Student.create(name='test-name', age=22, gender='M')
+    assert isinstance(new_stu, Student)
+    
+    new_stu.update(name="new-name", age=20)
+
+    updated_stu = Student.find(new_stu.id)
+    assert updated_stu.name == "new-name" and updated_stu.age == 20
 
 def test_find():
     new_stu = Student.create(name='test-name', age=22, gender='M')
