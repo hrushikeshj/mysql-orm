@@ -2,7 +2,6 @@ from .table_relation import TableRelation
 import mysql.connector
 import yaml
 
-# TODO: update
 # TODO: no Pk
 DEFAULT_CONFIG = {
     'host': "localhost",
@@ -65,7 +64,7 @@ class Table:
     relations = None
 
     table_name = None
-    _column_names = None
+    column_names = None
 
     log_sql = True
 
@@ -74,15 +73,14 @@ class Table:
         Gets column names from the table and makes them as instance variables
         """
         self.__in_db = False
-        column_names = self.column_names()
 
         # set initial val as None
-        for field in column_names:
+        for field in self.column_names:
             setattr(self, field, None)
 
         for key, val in args.items():
             # raise error if key is not present in column
-            if key not in column_names: raise HORMError('%s is not a column in %s table' % (key, self.table_name))
+            if key not in self.column_names: raise HORMError('%s is not a column in %s table' % (key, self.table_name))
 
             setattr(self, key, val)
         
@@ -111,15 +109,14 @@ class Table:
 
         # sql_query_temp => Eg- INSERT INTO students (id, name, gender, age) VALUES (%s, %s, %s, %s);
         insert_sql = "INSERT INTO {table_name} ({columns}) VALUES ({values});"
-        column_names = self.column_names()
-        values = [getattr(self, column) for column in column_names]
+        values = [getattr(self, column) for column in self.column_names]
         
         # Eg- ["%s", "%s"]
-        values_placehorder = ["%s"] * len(column_names)
+        values_placehorder = ["%s"] * len(self.column_names)
 
         sql_query_temp = insert_sql.format(
                     table_name = self.table_name,
-                    columns = ', '.join(column_names),
+                    columns = ', '.join(self.column_names),
                     values = ', '.join(values_placehorder)
                     )
 
@@ -218,15 +215,10 @@ class Table:
         return [cls(**arg).mark_as_created() for arg in arr]
 
     @classmethod
-    def column_names(cls):
-        if cls._column_names is None:
-            cls.execute(f"describe { cls.table_name };")
-            cls._column_names = [row['Field'] for row in cls.cursor]
-
-        return cls._column_names.copy()
-
-    @classmethod
     def describe_table(cls):
+        """
+        returns a dict of (`describe $table`)
+        """
         cls.execute(f"describe { cls.table_name };")
         return cls.cursor.fetchall()
 
@@ -255,7 +247,7 @@ class Table:
         cls.cursor = cls.connection.cursor
 
     def __eq__(self, other):
-        for field in self.column_names():
+        for field in self.column_names:
             if getattr(self, field) != getattr(other, field):
                 return False
 
@@ -274,6 +266,8 @@ class Table:
             cls.connect(config_dict=DEFAULT_CONFIG)
 
         desc_table = cls.describe_table()
+        # set column_names
+        cls.column_names = [row['Field'] for row in desc_table]
 
         # find PRIMARY KEY
         for field_ppt in desc_table:
