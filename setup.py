@@ -5,7 +5,7 @@ HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
 
 setup(
-    name='mysql-orm',
+    name='orm-mysql',
     version='0.0.1',
     description='An ORM for MySql.',
     long_description=README,
@@ -16,6 +16,7 @@ setup(
     license='MIT',
     classifiers=[
         "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
     ],
     packages=['orm'],
