@@ -15,19 +15,24 @@ on:
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
-    
-    services:
-      mysql:
-          image: mysql:5.7
-          env:
-              MYSQL_DATABASE: test
-          ports:
-              - 3306
-          options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-          
+    env:
+      ORM_MYSQL_PORT: 3380
+      ORM_MYSQL_USER: root
+      ORM_MYSQL_PASSWORD: root
+      ORM_MYSQL_DATABASE: test
     steps:
+    - uses: mirromutth/mysql-action@v1.1
+      with:
+        host port: ${{ env.ORM_MYSQL_PORT }}
+        character set server: 'utf8'
+        collation server: 'utf8_general_ci'
+        mysql version: '8.0'
+        mysql database: ${{ env.ORM_MYSQL_DATABASE }}
+        mysql root password: ${{ env.ORM_MYSQL_PASSWORD }}
+        mysql user: ${{ env.ORM_MYSQL_USER }}
+        mysql password: ${{ env.ORM_MYSQL_PASSWORD }}
+        
     - uses: actions/checkout@v2
     - run: ls
     - run: pip install pytest
