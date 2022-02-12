@@ -45,6 +45,7 @@ jobs:
         mysql --version
         mysql --port=${{ env.ORM_MYSQL_PORT }} -uroot -p${{ env.ORM_MYSQL_PASSWORD }} -e "CREATE DATABASE ${{ env.ORM_MYSQL_DATABASE }};"
         mysql --port=${{ env.ORM_MYSQL_PORT }} -uroot -p${{ env.ORM_MYSQL_PASSWORD }} ${{ env.ORM_MYSQL_DATABASE }} < tests/create.sql
+        mysql --port=${{ env.ORM_MYSQL_PORT }} -uroot -p${{ env.ORM_MYSQL_PASSWORD }} ${{ env.ORM_MYSQL_DATABASE }} -e "show tables;"
     - run: pip install pytest
     - run: pytest
       
