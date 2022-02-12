@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ORM_MYSQL_PORT: 3380
-      ORM_MYSQL_USER: root
+      ORM_MYSQL_USER: root1
       ORM_MYSQL_PASSWORD: root
       ORM_MYSQL_DATABASE: test
     steps:
@@ -40,7 +40,7 @@ jobs:
         pip install .
         pip list
     - name: Create tables
-      run:  mysql --port=${{ env.ORM_MYSQL_PORT }} -u${{ env.ORM_MYSQL_USER }} -p${{ env.ORM_MYSQL_PASSWORD }} ${{ env.ORM_MYSQL_PASSWORD }} < tests/create.sql
+      run:  mysql --port=${{ env.ORM_MYSQL_PORT }} -u${{ env.ORM_MYSQL_USER }} -p${{ env.ORM_MYSQL_PASSWORD }} ${{ env.ORM_MYSQL_DATABASE }} < tests/create.sql
     - run: pip install pytest
     - run: pytest
       
