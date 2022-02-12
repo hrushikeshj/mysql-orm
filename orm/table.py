@@ -38,6 +38,7 @@ class MYSQLConnection():
         self.log_sql = log_sql
 
     def execute(self, sql, params=None):
+        print(sql, params)
         self.cursor.execute(sql, params = params)
 
         if self.log_sql: self.log()
