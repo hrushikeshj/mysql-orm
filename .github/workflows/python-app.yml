@@ -27,7 +27,7 @@ jobs:
         host port: ${{ env.ORM_MYSQL_PORT }}
         character set server: 'utf8'
         collation server: 'utf8_general_ci'
-        mysql version: '8.0'
+        mysql version: '5.7'
         mysql database: ${{ env.ORM_MYSQL_DATABASE }}
         mysql root password: ${{ env.ORM_MYSQL_PASSWORD }}
         mysql user: ${{ env.ORM_MYSQL_USER }}
