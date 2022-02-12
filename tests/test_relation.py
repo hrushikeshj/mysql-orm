@@ -1,5 +1,16 @@
 import pytest
+import os
 from orm import Table, has_many, belongs_to
+
+CONFIG = {
+    'host': os.environ.get('ORM_MYSQL_HOST') or 'localhost',
+    'port': os.environ.get('ORM_MYSQL_PORT') or 3306,
+    'user': os.environ.get('ORM_MYSQL_USER'),
+    'password': os.environ.get('ORM_MYSQL_PASSWORD'),
+    'database': os.environ.get('ORM_MYSQL_DATABASE')
+}
+
+Table.connect(config_dict=CONFIG)
 
 class Article(Table):
     table_name = 'articles'
