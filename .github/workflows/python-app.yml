@@ -43,7 +43,7 @@ jobs:
       run: |
         sudo service mysql restart
         mysql --version
-        mysql --port=${{ env.ORM_MYSQL_PORT }} -uroot -p${{ env.ORM_MYSQL_PASSWORD }} -e "show databases;"
+        mysql --port=${{ env.ORM_MYSQL_PORT }} -uroot -p${{ env.ORM_MYSQL_PASSWORD }} -e "CREATE DATABASE ${{ env.ORM_MYSQL_DATABASE }};"
         mysql --port=${{ env.ORM_MYSQL_PORT }} -uroot -p${{ env.ORM_MYSQL_PASSWORD }} ${{ env.ORM_MYSQL_DATABASE }} < tests/create.sql
     - run: pip install pytest
     - run: pytest
