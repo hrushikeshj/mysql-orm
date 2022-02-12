@@ -16,8 +16,8 @@ class Author(Table):
     ]
 
 #print(Table.get_sub_class('Article'))
-print(Author.find(1).art.where(id=2))
-print(Article.find(3).art())
+#print(Author.find(1).art.where(id=2))
+#print(Article.find(3).art())
 #Article.create(title="t3", content="c3", author_id='1')
 
 def test_connection():

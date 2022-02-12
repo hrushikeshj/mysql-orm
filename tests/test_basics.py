@@ -1,24 +1,15 @@
 import pytest
 from orm import Table, has_many, belongs_to
 
-class Article(Table):
-    table_name = 'articles'
+CONFIG = {
+        'host': "sql6.freemysqlhosting.net",
+        'port': "3306",
+        'user': "sql6471929",
+        'password': "n6sA2BD5Hk",
+        'database': "sql6471929"
+    }
 
-    relations = [
-        belongs_to(name='art', _class='Author', foreign_key='author_id', primary_key='id')
-    ]
-
-class Author(Table):
-    table_name = 'authors'
-    
-    relations = [
-        has_many(name='art', _class='Article', foreign_key='author_id')
-    ]
-
-#print(Table.get_sub_class('Article'))
-print(Author.find(1).art.where(id=2))
-print(Article.find(3).art())
-#Article.create(title="t3", content="c3", author_id='1')
+Table.connect(config_dict=CONFIG)
 """
 Table student with following schema is alredy created in db
 
@@ -39,7 +30,7 @@ def test_connection():
     assert Student.cursor is not None, "connection should me made"
 
 def test_schema():
-    assert Student.column_names() == ['id', 'name', 'gender', 'age']
+    assert Student.column_names == ['id', 'name', 'gender', 'age']
 
 def test__init__():
     """
