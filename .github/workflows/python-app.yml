@@ -35,10 +35,12 @@ jobs:
         
     - uses: actions/checkout@v2
     - run: ls
-    - run: pip install pytest
     - name: build
       run: |
         pip install .
         pip list
+    - name: Create tables
+      run:  mysql --port=${{ env.ORM_MYSQL_PORT }} -u${{ env.ORM_MYSQL_USER }} -p${{ env.ORM_MYSQL_PASSWORD }} ${{ env.ORM_MYSQL_PASSWORD }} < tests/create.sql
+    - run: pip install pytest
     - run: pytest
       
