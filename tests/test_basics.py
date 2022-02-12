@@ -2,12 +2,12 @@ import pytest
 from orm import Table, has_many, belongs_to
 
 CONFIG = {
-        'host': "sql6.freemysqlhosting.net",
-        'port': "3306",
-        'user': "sql6471929",
-        'password': "n6sA2BD5Hk",
-        'database': "sql6471929"
-    }
+    'host': "localhost",
+    'port': "3306",
+    'user': "root",
+    'password': "root",
+    'database': "test"
+}
 
 Table.connect(config_dict=CONFIG)
 """
