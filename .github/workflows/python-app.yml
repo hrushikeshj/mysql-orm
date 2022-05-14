@@ -16,22 +16,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    env:
-      ORM_MYSQL_PORT: 3380
-      ORM_MYSQL_USER: root
-      ORM_MYSQL_PASSWORD: root
-      ORM_MYSQL_DATABASE: test
     steps:
-    - uses: mirromutth/mysql-action@v1.1
-      with:
-        host port: ${{ env.ORM_MYSQL_PORT }}
-        character set server: 'utf8'
-        collation server: 'utf8_general_ci'
-        mysql version: '8.0'
-        mysql database: ${{ env.ORM_MYSQL_DATABASE }}
-        mysql root password: ${{ env.ORM_MYSQL_PASSWORD }}
-        mysql user: ${{ env.ORM_MYSQL_USER }}
-        mysql password: ${{ env.ORM_MYSQL_PASSWORD }}
         
     - uses: actions/checkout@v2
     - run: ls
@@ -39,13 +24,6 @@ jobs:
       run: |
         pip install .
         pip list
-    - name: Create tables
-      run: |
-        sudo service mysql restart
-        mysql --version
-        mysql --port=${{ env.ORM_MYSQL_PORT }} -uroot -p${{ env.ORM_MYSQL_PASSWORD }} -e "CREATE DATABASE ${{ env.ORM_MYSQL_DATABASE }};"
-        mysql --port=${{ env.ORM_MYSQL_PORT }} -uroot -p${{ env.ORM_MYSQL_PASSWORD }} ${{ env.ORM_MYSQL_DATABASE }} < tests/create.sql
-        mysql --port=${{ env.ORM_MYSQL_PORT }} -uroot -p${{ env.ORM_MYSQL_PASSWORD }} ${{ env.ORM_MYSQL_DATABASE }} -e "desc student"
     - run: pip install pytest
     - run: pytest
       
