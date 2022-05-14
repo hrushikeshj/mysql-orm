@@ -26,5 +26,3 @@ class Author(Table):
 def test_connection():
     assert Author.cursor is not None, "connection should me made"
 
-def test_h():
-    assert 1==1
