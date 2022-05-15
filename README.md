@@ -31,6 +31,9 @@ class Student(Table):
 
 #### OR use `get_table()`
 ```python
+from orm import Table, get_table
+Table.connect(config_dict=CONFIG)
+
 Student = get_table('student')
 ```
 
