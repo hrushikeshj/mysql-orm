@@ -5,6 +5,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -24,7 +25,8 @@ jobs:
           pip install .
       - name: create Mysql DB for pytest
         run: |
-          sudo mysql -uroot -proot < ./tests/create.sql
+          sudo service mysql start
+          mysql -uroot -proot < ./tests/create.sql
       - name: Test with pytest
         run: |
           pytest
