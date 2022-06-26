@@ -24,7 +24,7 @@ jobs:
           pip install .
       - name: create Mysql DB for pytest
         run: |
-          mysql -uroot -proot < ./tests/create.sql
+          sudo mysql -uroot -proot < ./tests/create.sql
       - name: Test with pytest
         run: |
           pytest
