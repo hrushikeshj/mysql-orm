@@ -24,6 +24,7 @@ jobs:
       run: |
         pip install .
         pip list
+        mysql --version
 #    - run: pip install pytest
 #    - run: pytest
       
