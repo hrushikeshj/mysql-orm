@@ -3,7 +3,7 @@ import mysql.connector
 
 CONFIG = {
     'host': os.environ.get('ORM_MYSQL_HOST') or 'localhost',
-    'port': os.environ.get('ORM_MYSQL_PORT') or 3307,
+    'port': os.environ.get('ORM_MYSQL_PORT') or 3306,
     'user': os.environ.get('ORM_MYSQL_USER') or 'root',
     'password': os.environ.get('ORM_MYSQL_PASSWORD') or 'root',
     'database': os.environ.get('ORM_MYSQL_DATABASE') or 'hrushi'
