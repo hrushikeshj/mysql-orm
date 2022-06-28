@@ -17,7 +17,7 @@ jobs:
     # deploy only if tests passes
     needs: test
     runs-on: ubuntu-latest
-    permissions: read-all|write-all
+    permissions: write-all
 
     steps:
     - uses: actions/checkout@v3
