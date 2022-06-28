@@ -6,7 +6,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name='orm-mysql',
-    version='1.0.1',
+    version='1.0.2',
     description='An ORM for MySql.',
     long_description=README,
     long_description_content_type="text/markdown",
