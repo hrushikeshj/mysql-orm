@@ -10,8 +10,12 @@ permissions:
   contents: read
 
 jobs:
-  deploy:
+  test:
+    uses: ./.github/workflows/python-pytest.yml
 
+  deploy:
+    # deploy only if tests passes
+    needs: test
     runs-on: ubuntu-latest
 
     steps:

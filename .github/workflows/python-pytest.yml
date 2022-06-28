@@ -1,4 +1,4 @@
-name: Run tests
+name: Tests
 
 on:
   push:
@@ -12,7 +12,6 @@ jobs:
   test:
 
     runs-on: ubuntu-latest
-
 
     steps:
       - uses: actions/checkout@v3
