@@ -29,9 +29,9 @@ jobs:
         run: python setup.py sdist bdist_wheel
       # upload artidact
       - uses: actions/upload-artifact@v3
-          with:
-            name: orm-build
-            path: ./dist/
+        with:
+          name: orm-build
+          path: ./dist/
 
   deploy:
     # deploy only if tests passes
@@ -39,9 +39,9 @@ jobs:
     runs-on: ubuntu-latest
 
     - uses: actions/download-artifact@v3
-        with:
-          name: orm-build
-          path: ./dist
+      with:
+        name: orm-build
+        path: ./dist
 
     - name: Publish package
       uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
