@@ -45,11 +45,9 @@ jobs:
     
     - name: Upload Release Asset
       if: github.event_name == 'release'
-      uses: actions/upload-release-asset@v1
+      uses: NBTX/upload-release-assets@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.get_release.outputs.upload_url }} 
-        asset_path: ./dist/
-        asset_name: my-artifact.zip
-        asset_content_type: application/octet-stream
+        targets: ./dist/*
