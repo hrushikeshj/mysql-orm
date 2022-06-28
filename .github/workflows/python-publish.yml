@@ -55,7 +55,7 @@ jobs:
 
   upload-build-to-release:
     # if triggered by release, then upload build files
-    #if: github.event_name == 'release'
+    if: github.event_name == 'release'
     needs: build
 
     permissions:
