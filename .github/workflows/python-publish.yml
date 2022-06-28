@@ -42,6 +42,9 @@ jobs:
         with:
           name: orm-build
           path: ./dist
+      
+      - name: ls dist
+        run: ls ./dist -R
 
       - name: Publish package
         uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
