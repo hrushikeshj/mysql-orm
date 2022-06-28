@@ -34,7 +34,6 @@ jobs:
           path: ./dist/
 
   deploy:
-    # deploy only if tests passes
     needs: [test, build]
     runs-on: ubuntu-latest
 
