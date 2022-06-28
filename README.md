@@ -1,6 +1,10 @@
 # MySql ORM
 
 A simple Object Relational Mapper for MySql. Works with existing tables and the schema of the tables are automatically inferred.
+
+![tests](https://github.com/hrushikeshj/mysql-orm/actions/workflows/python-pytest.yml/badge.svg)
+![build](https://github.com/hrushikeshj/mysql-orm/actions/workflows/python-publish.yml/badge.svg?branch=v1.0.6)
+
 ### Install
 ```bash
 pip install orm-mysql
